@@ -10,5 +10,10 @@
   <%= @news.news %>
 </p>
 
+<p>
+  <strong>Tag:</strong>
+  <%= @news.tag %>
+</p>
+
 <%= link_to 'Edit', edit_news_path(@news) %> |
 <%= link_to 'Back', news_index_path %>
