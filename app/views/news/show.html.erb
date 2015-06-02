@@ -18,5 +18,12 @@
   <strong>Picture:</strong>
   <%= image_tag @news.pic1.url %>
 </p>
+
+<p>
+ <strong>Published At:</strong>
+ <span id="published-at"><%= @news.published_at %></span>
+</p>
+
+<%= link_to 'Publish', publish_news_path(@news), method: :patch, remote: true %> |
 <%= link_to 'Edit', edit_news_path(@news) %> |
 <%= link_to 'Back', news_index_path %>
