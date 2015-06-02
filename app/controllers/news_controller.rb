@@ -1,5 +1,5 @@
 class NewsController < ApplicationController
-  before_action :set_news, only: [:show, :edit, :update, :destroy]
+  before_action :set_news, only: [:show, :edit, :update, :destroy, :publish]
   
   # GET /news
   # GET /news.json
@@ -20,6 +20,10 @@ class NewsController < ApplicationController
   # GET /news/1/edit
   def edit
   end
+
+  def publish
+    @news.update(published_at: Time.zone.now)
+  end 
 
   # POST /news
   # POST /news.json
@@ -69,6 +73,6 @@ class NewsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def news_params
-      params.require(:news).permit(:title, :news,)
+      params.require(:news).permit(:title, :news, :pic1)
     end
 end
