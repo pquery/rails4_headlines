@@ -14,6 +14,9 @@
   <strong>Tag:</strong>
   <%= @news.tag %>
 </p>
-
+<p>
+  <strong>Picture:</strong>
+  <%= image_tag @news.pic1.url %>
+</p>
 <%= link_to 'Edit', edit_news_path(@news) %> |
 <%= link_to 'Back', news_index_path %>
