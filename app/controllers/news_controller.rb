@@ -10,6 +10,8 @@ class NewsController < ApplicationController
   # GET /news/1
   # GET /news/1.json
   def show
+     @news= News.find(params[:id])
+     authorize! :read, @news
   end
 
   # GET /news/new
