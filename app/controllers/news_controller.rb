@@ -1,4 +1,6 @@
 class NewsController < ApplicationController
+  before_action :authenticate_user!, except: [:index, :show]
+  load_and_authorize_resource
   before_action :set_news, only: [:show, :edit, :update, :destroy, :publish]
   
   # GET /news
@@ -73,6 +75,12 @@ class NewsController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def news_params
-      params.require(:news).permit(:title, :news, :pic1)
+      updated_params = params.require(:news).permit(:title, :news, :pic1, :user_id)
+      # Force user_id to current_user.id unless current_user is an admin
+      # This will force a user id should one not be passed in.
+      # Since our ability class blocks users from editing other user stories, any user
+      # trying to take over another users' story they would be blocked.
+      updated_params[:user_id] = current_user.id unless current_user.role == 'admin'
+      return updated_params
     end
 end

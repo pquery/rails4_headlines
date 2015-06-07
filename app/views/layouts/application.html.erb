@@ -18,8 +18,12 @@
         <nav>
           <ul class="nav navbar-nav navbar-right">
             <li><%= link_to "Home",   '/' %></li>
-            <li><%= link_to 'New News', new_news_path %></li>
-            <li><%= link_to "Log in", '#' %></li>
+            <% if user_signed_in? %> 
+							<li><%= link_to "Signed in as #{current_user.first_name}", edit_user_registration_path(current_user) %></li>
+							<li> <%= link_to "Log out",  destroy_user_session_path, :method => :delete  %>
+						<% else %>   
+							<li><%= link_to "Log in", new_user_session_path %></li>
+						<%end %>
             
           </ul>
         </nav>
@@ -27,6 +31,12 @@
       </div>
     </header>
     <div class="container">
+	    <% flash.each do |type, message| %>
+			  <div class="alert <%= bootstrap_class_for(type) %> alert-dismissible fade in">
+			    <button type="button" class="close" data-dismiss="alert"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+			    <%= message %>
+			  </div>
+			<% end %>
       <%= yield %>
     </div>
   </body>

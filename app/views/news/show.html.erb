@@ -1,5 +1,3 @@
-<p id="notice"><%= notice %></p>
-
 <p>
   <strong>Title:</strong>
   <%= @news.title %>
@@ -24,6 +22,8 @@
  <span id="published-at"><%= @news.published_at %></span>
 </p>
 
-<%= link_to 'Publish', publish_news_path(@news), method: :patch, remote: true %> |
-<%= link_to 'Edit', edit_news_path(@news) %> |
+<% if can? :edit, @news %>
+	<%= link_to 'Publish', publish_news_path(@news), method: :patch, remote: true %> |
+  <%= link_to 'Edit', edit_news_path(@news) %> |
+<% end %>
 <%= link_to 'Back', news_index_path %>

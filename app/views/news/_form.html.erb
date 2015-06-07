@@ -11,6 +11,13 @@
     </div>
   <% end %>
 
+<% if can? :manage, News %>
+  <div class="field">
+	  <%= f.label :user_id, 'Editor' %><br>
+  	<%= f.collection_select(:user_id, User.select([:id, :first_name, :last_name]).where(role: ['admin', 'editor']),  :id, lambda{|i| [i.first_name, i.last_name].join(' ')}) %>
+  </div>
+<% end %>
+
   <div class="field">
     <%= f.label :title %><br>
     <%= f.text_field :title %>
